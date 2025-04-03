@@ -28,11 +28,22 @@ async def ask_question(request: AskRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Context 파일 로드 실패: {e}")
 
-    # GPT 호출을 위한 메시지 구성
+    # GPT 호출을 위한 메시지 구성 (role: system 1개 + user 1개)
     messages = [
-        {"role": "system", "content": "다음은 입고된 재고 정보입니다. 질문에 이 정보를 활용해 답변해주세요."},
-        {"role": "system", "content": json.dumps(context_data["inboundItems"], ensure_ascii=False, indent=2)},
-        {"role": "user", "content": request.question}
+        {
+            "role": "system",
+            "content": "다음은 최근 입고된 재고 데이터입니다. 사용자의 질문에 이 정보를 바탕으로 응답해주세요."
+        },
+        {
+            "role": "user",
+            "content": f"""
+다음은 입고된 재고 목록입니다:
+
+{json.dumps(context_data["inboundItems"], ensure_ascii=False, indent=2)}
+
+질문: {request.question}
+"""
+        }
     ]
 
     # OpenRouter API 호출
