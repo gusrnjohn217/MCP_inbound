@@ -1,0 +1,24 @@
+{
+    "updatedAt": "2025-04-03T10:00:00Z",
+    "inboundItems": [
+      {
+        "sku": "KOR-PORK-240403-001",
+        "name": "삼겹살",
+        "category": "고기",
+        "quantity": 25,
+        "location": "냉장고-1",
+        "supplier": "정육마트",
+        "createdAt": "2025-04-03T08:30:00Z"
+      },
+      {
+        "sku": "KOR-CHICK-240403-002",
+        "name": "닭다리",
+        "category": "닭고기",
+        "quantity": 40,
+        "location": "냉장고-2",
+        "supplier": "농장마트",
+        "createdAt": "2025-04-03T09:00:00Z"
+      }
+    ]
+  }
+  
