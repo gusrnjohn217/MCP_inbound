@@ -1,9 +1,19 @@
+# FastAPI 앱 실행 파일 (Main 서버 역할)
 import os
 import json
+import threading
+import subprocess
 from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import httpx
+
+# ✅ Kafka consumer.py 자동 실행
+def run_kafka_consumer():
+    print("Kafka Consumer 백그라운드 실행 시작...")
+    subprocess.Popen(["python", "kafka_consumer.py"])
+
+threading.Thread(target=run_kafka_consumer, daemon=True).start()
 
 # 환경 변수 로딩
 load_dotenv()
@@ -65,3 +75,4 @@ async def ask_question(request: AskRequest):
             return {"answer": result["choices"][0]["message"]["content"]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"GPT 호출 실패: {e}")
+

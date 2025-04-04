@@ -1,3 +1,5 @@
+# Kafka 메시지 consume + context 저장 역할
+
 import os
 import json
 from kafka import KafkaConsumer
